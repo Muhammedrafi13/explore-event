@@ -1,11 +1,10 @@
 import { IEvent } from "@/database";
 import EventCard from "./EventCard";
+import { getAllEvents } from "@/lib/actions/mainEvent.action";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const EventList = async () => {
-    const response = await fetch(`${BASE_URL}/api/events`);
-    const { events } = await response.json();
+    const events = await getAllEvents();
 
     if (!events || events.length === 0) {
         return <p>No events are currently scheduled.</p>;
